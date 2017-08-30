@@ -49,26 +49,30 @@ function main() {
                 }
             })
             
-            if (namelessUsers == 0) {
+            if (namelessUsers.length == 0) {
                 console.log("There are no nameless organization members");
             } else {
                 console.log(namelessUsers);
                 console.log("Emailing nameless members...");
                 // Authorize a client with the loaded credentials, 
                 // then call sendEmail with the authorization.
-                const gmail = new Gmail();
-                gmail.authorize(auth => {
-                    namelessUsers.forEach(user => { 
-                        if (user.email) {
-                            console.log(`${user.login}: ${user.email}`);
-                            gmail.sendMail(auth, createMessage(user.email));
-                        } else {
-                            console.log(`${user.login}: No Email`);
-                        }
+                try {
+                    const gmail = new Gmail();
+                    gmail.authorize(auth => {
+                        namelessUsers.forEach(user => { 
+                            if (user.email) {
+                                console.log(`${user.login}: ${user.email}`);
+                                gmail.sendMail(auth, createMessage(user.email));
+                            } else {
+                                console.log(`${user.login}: No Email`);
+                            }
+                        })
+                        console.log("Uploading nameless member info to s3...");
+                        uploadNamelessToS3(JSON.stringify(namelessUsers, null, 4));
                     })
-                    console.log("Uploading nameless member info to s3...");
-                    uploadNamelessToS3(JSON.stringify(namelessUsers, null, 4));
-                })
+                } catch (err) {
+                    console.log(err);
+                }
             }
         })
     })
