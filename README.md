@@ -2,7 +2,9 @@
 
 ### Setup
 Install Node.js if you don't already have it installed. 
+
 `brew install node`
+
 It was developed and tested on Node.js 8.4.0.
 
 No additional libraries are required to be installed to run this code. I used other libraries but they should all be included with my code in the node_modules folder.
@@ -13,6 +15,7 @@ When you first run the code, if it's required to send an email, it will provide 
 
 ### How to run the app
 Inside the directory where the code resides, run this in a terminal:
+
 `node notify_nameless.py`
 
 ### Assumptions
