@@ -15,6 +15,7 @@ When you first run the code, if it's required to send an email, it will provide 
 
 ### How to run the app
 Inside the directory where the code resides, run this in a terminal:
+
 `node notify_nameless.py`
 
 ### Assumptions
