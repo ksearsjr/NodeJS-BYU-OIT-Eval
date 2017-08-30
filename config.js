@@ -18,5 +18,6 @@ config.AWS = {
 
 module.exports = config;
 
+// Set environment variables so that AWS API will pick them up
 process.env.AWS_ACCESS_KEY_ID = config.AWS.aws_access_key_id;
 process.env.AWS_SECRET_ACCESS_KEY = config.AWS.aws_secret_access_key;

@@ -24,14 +24,17 @@ function uploadNamelessToS3(fileContents) {
     const s3 = new AWS.S3();
     var params = {Bucket: config.AWS.s3_bucket, Key: config.AWS.s3_bucket_key, Body: fileContents, ContentType: 'application/json'};
     s3.upload(params, function(err, data) {
-      //console.log(err, data);
-      console.log("Done uploading to S3");
+        if (!err) {
+            console.log("Done uploading to S3");
+        } else {
+            console.log(err);
+        }
     });
 }
 
 function main() {
     if (!config.github.username) {
-        console.log("Error: Please enter the required information in config.py")
+        console.log("Error: Please enter the required information in config.js")
         return
     }
 

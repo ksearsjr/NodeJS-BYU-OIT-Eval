@@ -12,6 +12,7 @@ module.exports = class GitHub {
     }
 
     getOrgMembers(orgName) {
+        // Get organization members from GitHub based on the organization name
         const uri = this.host + `/orgs/${orgName}/members`;
         
         const options = {
@@ -25,6 +26,7 @@ module.exports = class GitHub {
     }    
 
     getUser(loginName) {
+        // Get a single user from GitHub based on the login name
         const uri = this.host + `/users/${loginName}`;
         
         const options = {

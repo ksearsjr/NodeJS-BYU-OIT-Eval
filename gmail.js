@@ -47,6 +47,7 @@ module.exports = class Gmail {
             scope: SCOPES
         });
         console.log('Authorize this app by visiting this url: ', authUrl);
+        // Ask the user for the key returned from the url
         var rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -66,6 +67,7 @@ module.exports = class Gmail {
     }
   
     storeToken(token) {
+        // Save the token to disk
         try {
             fs.mkdirSync(TOKEN_DIR);
         } catch (err) {
@@ -77,6 +79,7 @@ module.exports = class Gmail {
     }
   
     sendMail(auth, message) {
+        // If valid auth, send the email
         var gmail = google.gmail('v1');
         gmail.users.messages.send({
             auth: auth,
