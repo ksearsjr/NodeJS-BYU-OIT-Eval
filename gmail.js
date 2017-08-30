@@ -14,7 +14,12 @@ const TOKEN_PATH = TOKEN_DIR + 'gmail-nodejs-quickstart.json';
 module.exports = class Gmail {
     constructor() {
         // Load client secrets from a local file.
-        this.clientSecret = JSON.parse(fs.readFileSync('client_secret.json'));
+        this.clientSecret = "";
+        try {
+            this.clientSecret = JSON.parse(fs.readFileSync('client_secret.json'));
+        } catch (err) {
+            throw "You must put the client_secret.json file in the application root";
+        }
     }
 
     authorize(callback) {
@@ -24,7 +29,7 @@ module.exports = class Gmail {
         var redirectUrl = credentials.installed.redirect_uris[0];
         var auth = new googleAuth();
         var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-        
+       
         // Check if we have previously stored a token.
         fs.readFile(TOKEN_PATH, (err, token) => {
             if (err) {
